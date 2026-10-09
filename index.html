@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luargram — conecta-te ao teu mundo</title>
+<style>
+:root{--blue:#6657e8;--blue2:#5142d5;--bg:#f4f5fb;--card:#fff;--text:#202238;--muted:#777b91;--line:#e9eaf2;--pink:#ff6c9b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text)}
+button,input,textarea{font:inherit}button{cursor:pointer;border:0}.top{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:20px;padding:0 max(18px,calc((100% - 1240px)/2));position:sticky;top:0;z-index:5}
+.brand{font-size:25px;font-weight:850;letter-spacing:-1px;color:var(--blue);white-space:nowrap}.brand span{color:var(--pink)}
+.search{background:#f2f3fa;border:0;border-radius:24px;padding:12px 16px;max-width:310px;width:100%;outline:none}.topnav{display:flex;gap:8px;margin:auto}.navbtn{background:transparent;color:var(--muted);font-size:21px;padding:10px 18px;border-radius:12px}.navbtn.active,.navbtn:hover{background:#f0efff;color:var(--blue)}.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ffb4d1,#7465f4);display:grid;place-items:center;color:white;font-weight:800;flex-shrink:0}
+.layout{max-width:1240px;margin:24px auto;padding:0 18px;display:grid;grid-template-columns:230px minmax(0,610px) 280px;gap:22px}.panel,.post,.composer,.stories{background:var(--card);border:1px solid var(--line);border-radius:18px}.side{position:sticky;top:88px;align-self:start;padding:14px}.profile-mini{display:flex;align-items:center;gap:10px;padding:10px 8px 18px;border-bottom:1px solid var(--line);margin-bottom:8px}.profile-mini strong{display:block;font-size:14px}.muted{color:var(--muted);font-size:12px}.sideitem{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;color:#555970;font-weight:600;font-size:14px}.sideitem:hover,.sideitem.sel{background:#f0efff;color:var(--blue)}.sideitem i{font-style:normal;font-size:19px;width:22px;text-align:center}.side small{display:block;color:#a0a2b3;line-height:1.5;padding:18px 8px 4px}
+.center{min-width:0}.welcome{margin:4px 0 16px}.welcome h2{margin:0 0 5px;font-size:23px}.welcome p{margin:0;color:var(--muted);font-size:14px}.stories{padding:14px;display:flex;gap:12px;overflow:auto;margin-bottom:16px}.story{min-width:70px;text-align:center;font-size:12px;color:#656980}.storyring{padding:3px;border-radius:50%;background:linear-gradient(135deg,#ff6c9b,#6c5ce7);width:58px;height:58px;margin:0 auto 7px}.storyring .avatar{width:52px;height:52px;border:2px solid white}.story.add .storyring{background:#f0efff}.story.add .avatar{background:#f0efff;color:var(--blue);font-size:26px}
+.composer{padding:16px;margin-bottom:16px}.compose-top{display:flex;gap:10px;align-items:center}.compose-top input{flex:1;min-width:0;border:0;background:#f5f6fb;padding:13px 16px;border-radius:24px;outline:none}.compose-actions{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:14px;padding-top:12px}.compose-actions span{font-size:13px;color:var(--muted)}.primary{background:var(--blue);color:#fff;padding:10px 19px;border-radius:22px;font-weight:700}.primary:hover{background:var(--blue2)}
+.post{padding:17px;margin-bottom:16px}.posthead{display:flex;align-items:center;gap:10px}.posthead .meta{flex:1}.posthead strong{font-size:14px}.posthead .when{display:block;color:#9a9caf;font-size:12px;margin-top:3px}.more{background:transparent;color:#8b8da0;font-size:22px}.posttext{font-size:14px;line-height:1.65;margin:15px 0}.postimage{width:100%;max-height:340px;object-fit:cover;border-radius:13px;background:#f0efff;display:block}.postactions{display:flex;gap:8px;border-top:1px solid var(--line);margin-top:14px;padding-top:11px}.action{flex:1;background:transparent;color:#777b91;padding:8px 4px;border-radius:9px;font-size:13px}.action:hover,.action.liked{background:#f0efff;color:var(--blue)}.commentbox{display:none;margin-top:12px;gap:8px}.commentbox.show{display:flex}.commentbox input{flex:1;min-width:0;border:1px solid var(--line);border-radius:20px;padding:10px 13px;outline:none}.commentlist{font-size:13px;margin-top:9px;color:#555970}.right{padding:16px;margin-bottom:16px}.right h3{font-size:15px;margin:0 0 14px}.friend{display:flex;align-items:center;gap:10px;margin:13px 0}.friend .info{flex:1}.friend strong{font-size:13px;display:block}.addfriend{color:var(--blue);background:#f0efff;border-radius:10px;padding:8px 10px;font-weight:700}.trend{padding:10px 0;border-bottom:1px solid var(--line)}.trend:last-child{border:0}.trend strong{font-size:13px;display:block}.trend small{color:var(--muted)}.foot{font-size:11px;color:#9a9caf;line-height:1.8}.empty{display:none;text-align:center;padding:30px;color:var(--muted)}
+@media(max-width:1050px){.layout{grid-template-columns:205px minmax(0,1fr)}.rightcol{display:none}.topnav{margin-left:auto;margin-right:0}.search{max-width:220px}}
+@media(max-width:700px){.top{height:60px;padding:0 12px;gap:10px}.brand{font-size:22px}.search{max-width:none;flex:1;padding:10px 12px;width:90px}.topnav{display:none}.top .avatar{width:34px;height:34px}.layout{display:block;margin:15px auto;padding:0 10px}.leftcol{display:none}.welcome h2{font-size:21px}.stories{border-radius:15px}.post,.composer{padding:13px;border-radius:15px}.postactions{gap:2px}.action{font-size:12px}.compose-actions span{font-size:12px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">Luar<span>gram</span></div>
+  <input class="search" id="search" placeholder="🔎 Procurar pessoas e publicações" aria-label="Pesquisar">
+  <nav class="topnav" aria-label="Navegação"><button class="navbtn active" title="Início">⌂</button><button class="navbtn" title="Amigos" onclick="notify('A área de amigos está em demonstração.')">♧</button><button class="navbtn" title="Mensagens" onclick="notify('As mensagens serão ligadas numa próxima versão.')">✉</button><button class="navbtn" title="Notificações" onclick="notify('Não tens novas notificações.')">♧</button></nav>
+  <div class="avatar" title="O teu perfil">L</div>
+</header>
+<div class="layout">
+<aside class="leftcol">
+ <div class="panel side">
+  <div class="profile-mini"><div class="avatar">L</div><div><strong>Leonardo</strong><span class="muted">@leonardo</span></div></div>
+  <a class="sideitem sel" href="#"><i>⌂</i> Feed principal</a>
+  <a class="sideitem" href="#amigos"><i>♧</i> Amigos</a>
+  <a class="sideitem" href="#mensagens" onclick="notify('Mensagens: em breve!')"><i>✉</i> Mensagens</a>
+  <a class="sideitem" href="#notificacoes" onclick="notify('Não tens novas notificações.')"><i>♢</i> Notificações</a>
+  <a class="sideitem" href="#guardados" onclick="notify('Publicações guardadas: em breve!')"><i>▤</i> Guardados</a>
+  <a class="sideitem" href="#servicos" onclick="openPay()"><i>✦</i> Patrocínio / Selo azul</a>
+  <a class="sideitem" href="#admin" onclick="openAdmin()"><i>⚙</i> Painel do dono</a>
+  <a class="sideitem" href="#perfil" onclick="notify('Perfil de demonstração.')"><i>◉</i> O meu perfil</a>
+  <small>LUARGRAM · Conecta-te ao teu mundo.<br>Sem vídeos. Só pessoas, ideias e momentos.</small>
+ </div>
+</aside>
+<main class="center">
+ <div class="welcome"><h2>Olá, Leonardo 👋</h2><p>O que se passa no teu mundo hoje?</p></div>
+ <section class="stories" aria-label="Histórias">
+  <div class="story add"><div class="storyring"><div class="avatar">+</div></div><span>Adicionar história</span></div>
+  <div class="story"><div class="storyring"><div class="avatar">AM</div></div><span>Ana M.</span></div>
+  <div class="story"><div class="storyring"><div class="avatar" style="background:linear-gradient(135deg,#ffc078,#ef795f)">JP</div></div><span>João P.</span></div>
+  <div class="story"><div class="storyring"><div class="avatar" style="background:linear-gradient(135deg,#72d7c0,#328cba)">MC</div></div><span>Maria C.</span></div>
+  <div class="story"><div class="storyring"><div class="avatar" style="background:linear-gradient(135deg,#b4a0ff,#ed8ab4)">DS</div></div><span>David S.</span></div>
+ </section>
+ <section class="composer">
+  <div class="compose-top"><div class="avatar">L</div><input id="postInput" placeholder="Partilha alguma coisa com os teus amigos..." maxlength="1000"></div>
+  <div class="compose-actions"><span>📷 Fotos e pensamentos — sem vídeos</span><button class="primary" onclick="publish()">Publicar</button></div>
+  <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#777b91;margin-top:10px">Adicionar foto <input id="photoInput" type="file" accept="image/*" style="max-width:190px;font-size:12px"></label>
+ </section>
+ <div id="feed">
+  <article class="post" data-search="ana manuel bom dia comunidade amizade">
+   <div class="posthead"><div class="avatar">AM</div><div class="meta"><strong>Ana Manuel</strong><span class="when">Há 12 minutos · 🌍 Público</span></div><button class="more" aria-label="Mais opções">···</button></div>
+   <p class="posttext">Bom dia, família Luargram! ☀️ Que hoje seja um dia cheio de boas notícias e novas oportunidades. Vamos espalhar energia positiva! 💜</p>
+   <div class="postactions"><button class="action" onclick="like(this)">♡ <span>Gostei</span> <b>24</b></button><button class="action" onclick="toggleComments(this)">▢ Comentar</button><button class="action" onclick="sharePost(this)">↗ Partilhar</button></div>
+   <div class="commentbox"><input placeholder="Escreve um comentário..." maxlength="300"><button class="primary" onclick="comment(this)">Enviar</button></div><div class="commentlist"></div>
+  </article>
+  <article class="post" data-search="joão pedro luanda amigos fim de semana">
+   <div class="posthead"><div class="avatar" style="background:linear-gradient(135deg,#ffc078,#ef795f)">JP</div><div class="meta"><strong>João Pedro</strong><span class="when">Há 1 hora · 🌍 Público</span></div><button class="more" aria-label="Mais opções">···</button></div>
+   <p class="posttext">Às vezes, as melhores coisas da vida são simples: uma boa conversa, amigos verdadeiros e um motivo para sorrir. 🤝✨ Quem concorda?</p>
+   <div class="postactions"><button class="action" onclick="like(this)">♡ <span>Gostei</span> <b>18</b></button><button class="action" onclick="toggleComments(this)">▢ Comentar</button><button class="action" onclick="sharePost(this)">↗ Partilhar</button></div>
+   <div class="commentbox"><input placeholder="Escreve um comentário..." maxlength="300"><button class="primary" onclick="comment(this)">Enviar</button></div><div class="commentlist"></div>
+  </article>
+  <article class="post" data-search="maria costa motivação sonhos">
+   <div class="posthead"><div class="avatar" style="background:linear-gradient(135deg,#72d7c0,#328cba)">MC</div><div class="meta"><strong>Maria Costa</strong><span class="when">Há 3 horas · 🌍 Público</span></div><button class="more" aria-label="Mais opções">···</button></div>
+   <p class="posttext">Nunca deixes de acreditar nos teus sonhos. Um passo de cada vez também é progresso. 🌱💫</p>
+   <div class="postactions"><button class="action" onclick="like(this)">♡ <span>Gostei</span> <b>32</b></button><button class="action" onclick="toggleComments(this)">▢ Comentar</button><button class="action" onclick="sharePost(this)">↗ Partilhar</button></div>
+   <div class="commentbox"><input placeholder="Escreve um comentário..." maxlength="300"><button class="primary" onclick="comment(this)">Enviar</button></div><div class="commentlist"></div>
+  </article>
+ </div>
+ <div class="empty" id="empty">Não encontrámos publicações com essa pesquisa.</div>
+</main>
+<aside class="rightcol">
+ <section class="panel right" id="amigos"><h3>👥 Pessoas que talvez conheças</h3>
+  <div class="friend"><div class="avatar">CM</div><div class="info"><strong>Carla Mendes</strong><span class="muted">3 amigos em comum</span></div><button class="addfriend" onclick="addFriend(this)">+</button></div>
+  <div class="friend"><div class="avatar" style="background:linear-gradient(135deg,#ffc078,#ef795f)">FN</div><div class="info"><strong>Fábio Neto</strong><span class="muted">2 amigos em comum</span></div><button class="addfriend" onclick="addFriend(this)">+</button></div>
+  <div class="friend"><div class="avatar" style="background:linear-gradient(135deg,#72d7c0,#328cba)">IS</div><div class="info"><strong>Inês Silva</strong><span class="muted">5 amigos em comum</span></div><button class="addfriend" onclick="addFriend(this)">+</button></div>
+ </section>
+ <section class="panel right"><h3>🔥 Assuntos populares</h3>
+  <div class="trend"><strong>#Luargram</strong><small>Juntos nesta comunidade</small></div><div class="trend"><strong>#Angola</strong><small>Partilha o que acontece</small></div><div class="trend"><strong>#Motivação</strong><small>Inspiração para hoje</small></div>
+ </section>
+ <div class="foot">Sobre · Privacidade · Termos · Ajuda<br>© 2026 Luargram</div>
+</aside>
+</div>
+
+<style>
+.modalback{display:none;position:fixed;inset:0;background:rgba(25,22,54,.55);z-index:20;align-items:center;justify-content:center;padding:16px}
+.modalback.open{display:flex}.modal{background:#fff;width:min(100%,520px);max-height:90vh;overflow:auto;border-radius:20px;padding:22px;box-shadow:0 20px 70px #17133a33}.modal h2{margin:0 0 8px;font-size:22px}.modal p{color:#73778d;font-size:14px;line-height:1.55}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.close{background:#f1f1f8;border-radius:50%;width:35px;height:35px;font-size:20px}.field{display:block;margin:12px 0;font-size:13px;font-weight:700;color:#555970}.field input,.field select,.field textarea{display:block;width:100%;margin-top:6px;padding:12px;border:1px solid #e4e5ef;border-radius:11px;background:white;outline-color:#6657e8}.servicechoice{display:flex;gap:10px;margin:14px 0}.servicechoice button{flex:1;text-align:left;border:1px solid #e5e5f0;background:#fafaff;border-radius:13px;padding:14px;color:#303149}.servicechoice button.chosen{border:2px solid #6657e8;background:#f3f1ff}.price{font-weight:800;font-size:20px;display:block;margin-top:7px;color:#5142d5}.notice{padding:12px;border-radius:12px;background:#f4f2ff;color:#5142d5;font-size:13px;line-height:1.5}.status{display:inline-block;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:800;background:#fff0d8;color:#966100}.adminstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.stat{background:#f6f6fc;border-radius:12px;padding:12px}.stat strong{display:block;font-size:21px}.stat small{font-size:11px;color:#777b91}.request{border:1px solid #e8e8f2;border-radius:13px;padding:13px;margin:10px 0}.requesttop{display:flex;justify-content:space-between;gap:8px;align-items:center}.request small{color:#777b91}.adminbtns{display:flex;gap:8px;margin-top:10px}.approve{background:#e6f8ee;color:#187849;border-radius:9px;padding:9px 12px;font-weight:700}.reject{background:#fff0f0;color:#b33c4a;border-radius:9px;padding:9px 12px;font-weight:700}.secondary{background:#f1f1f8;color:#555970;border-radius:10px;padding:10px 13px;font-weight:700}.adminlock{background:#fff7e8;padding:12px;border-radius:12px;color:#805d15;font-size:13px;line-height:1.5}
+</style>
+<div class="modalback" id="payModal" role="dialog" aria-modal="true" aria-label="Patrocínio e selo azul">
+ <div class="modal">
+  <div class="modalhead"><div><div class="brand">Luar<span>gram</span></div><h2 style="margin-top:8px">Patrocínio e Selo azul</h2></div><button class="close" onclick="closeModal('payModal')">×</button></div>
+  <p>Escolhe o serviço que pretendes solicitar. O pedido só será ativado depois de o administrador confirmar o pagamento.</p>
+  <div class="servicechoice">
+   <button id="chooseAd" class="chosen" onclick="chooseService('Publicidade')">📣 <b>Patrocínio de publicidade</b><span class="price" id="adPrice">500 Kz</span></button>
+   <button id="chooseBlue" onclick="chooseService('Selo azul')">☑️ <b>Selo azul</b><span class="price" id="bluePrice">1.000 Kz</span></button>
+  </div>
+  <label class="field">O teu nome<input id="payCustomer" placeholder="O teu nome completo" maxlength="100" required></label>
+  <label class="field">Nome da conta ou página<input id="payName" placeholder="Ex.: Loja do João" maxlength="100" required></label>
+  <label class="field">Detalhes do pedido<textarea id="payDetails" rows="2" placeholder="Explica brevemente o que pretendes promover ou verificar"></textarea></label>
+  <div class="notice"><b>Pagamento via Multicaixa Express</b><br>Número indicado pelo proprietário:<br><strong style="font-size:20px;letter-spacing:1px">944 589 164</strong><br>Efetua o pagamento apenas depois de confirmares o valor com o responsável. Este protótipo não confirma transferências automaticamente.</div>
+  <label class="field">Referência / código da operação (se disponível)<input id="payReference" placeholder="Código da operação"></label>
+  <label class="field">Enviar comprovativo (JPG, PNG, WEBP ou PDF; máximo 5 MB)<input id="receipt" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" required></label>
+  <p style="font-size:12px">O pedido será guardado no servidor e ficará pendente até o administrador confirmar manualmente o pagamento.</p>
+  <button class="primary" style="width:100%" onclick="submitPayment()">Enviar pedido para aprovação</button>
+  <div id="payMessage" class="notice" style="display:none;margin-top:12px"></div>
+ </div>
+</div>
+<script>
+let chosenService='Publicidade';
+let demoPrices={Publicidade:500,'Selo azul':1000};
+function openPay(){document.getElementById('payModal').classList.add('open')}
+function openAdmin(){window.location.href='/admin.html'}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+function chooseService(service){chosenService=service;document.getElementById('chooseAd').classList.toggle('chosen',service==='Publicidade');document.getElementById('chooseBlue').classList.toggle('chosen',service==='Selo azul')}
+function fmtPrice(n){return Number(n).toLocaleString('pt-PT')+' Kz'}
+async function submitPayment(){
+ const customer=document.getElementById('payCustomer').value.trim(),name=document.getElementById('payName').value.trim(),file=document.getElementById('receipt').files[0],reference=document.getElementById('payReference').value.trim();
+ if(!customer||!name){notify('Preenche o teu nome e o nome da conta/página.');return}if(!file){notify('Anexa o comprovativo do pagamento.');return}
+ const form=new FormData();form.append('customer_name',customer);form.append('account_name',name);form.append('payment_type',chosenService==='Selo azul'?'blue_badge':'advertising_sponsorship');form.append('transaction_reference',reference);form.append('receipt',file);
+ const msg=document.getElementById('payMessage');msg.style.display='block';msg.textContent='A enviar pedido...';
+ try{const response=await fetch('/api/payments',{method:'POST',body:form,credentials:'same-origin'});const data=await response.json();if(!response.ok)throw new Error(data.error||'Não foi possível enviar o pedido.');msg.textContent=data.message+' Número do pedido: '+data.request_id+'. Guarda este número.';document.getElementById('payCustomer').value='';document.getElementById('payName').value='';document.getElementById('payReference').value='';document.getElementById('receipt').value=''}catch(e){msg.textContent=e.message||'Erro de ligação. Tenta novamente'}
+}
+</script>
+
+<script>
+const $=s=>document.querySelector(s);
+function notify(msg){alert(msg)}
+function like(btn){let b=btn.querySelector('b'),liked=btn.classList.toggle('liked');b.textContent=Number(b.textContent)+(liked?1:-1);btn.querySelector('span').textContent=liked?'Gostaste':'Gostei';btn.firstChild.textContent=liked?'♥ ':'♡ '}
+function toggleComments(btn){btn.closest('.post').querySelector('.commentbox').classList.toggle('show')}
+function comment(btn){let box=btn.parentElement,input=box.querySelector('input'),val=input.value.trim();if(!val)return;let list=box.nextElementSibling,el=document.createElement('div');el.textContent='Tu: '+val;el.style.cssText='padding:8px 10px;background:#f5f6fb;border-radius:10px;margin-top:6px';list.appendChild(el);input.value=''}
+function sharePost(btn){let p=btn.closest('.post').querySelector('.posttext').innerText;if(navigator.share)navigator.share({title:'Luargram',text:p}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(p).then(()=>notify('Texto da publicação copiado!')).catch(()=>notify(p));else notify(p)}
+function addFriend(btn){btn.textContent=btn.textContent==='+'?'✓':'+';btn.style.background=btn.textContent==='✓'?'#e8f8ef':'#f0efff';btn.style.color=btn.textContent==='✓'?'#188653':'#5142d5'}
+function publish(){let input=$('#postInput'),txt=input.value.trim(),file=$('#photoInput').files[0];if(!txt&&!file){notify('Escreve alguma coisa ou escolhe uma foto antes de publicar.');return}let post=document.createElement('article');post.className='post';post.dataset.search=(txt||'').toLowerCase();let safe=document.createElement('p');safe.className='posttext';safe.textContent=txt;post.innerHTML='<div class="posthead"><div class="avatar">L</div><div class="meta"><strong>Leonardo</strong><span class="when">Agora mesmo · 🌍 Público</span></div></div>';if(txt)post.appendChild(safe);if(file){if(!file.type.startsWith('image/')){notify('Escolhe um ficheiro de imagem.');return}let img=document.createElement('img');img.className='postimage';img.alt='Foto publicada';img.src=URL.createObjectURL(file);post.appendChild(img)}post.insertAdjacentHTML('beforeend','<div class="postactions"><button class="action" onclick="like(this)">♡ <span>Gostei</span> <b>0</b></button><button class="action" onclick="toggleComments(this)">▢ Comentar</button><button class="action" onclick="sharePost(this)">↗ Partilhar</button></div><div class="commentbox"><input placeholder="Escreve um comentário..." maxlength="300"><button class="primary" onclick="comment(this)">Enviar</button></div><div class="commentlist"></div>');$('#feed').prepend(post);input.value='';$('#photoInput').value='';post.scrollIntoView({behavior:'smooth',block:'start'})}
+$('#search').addEventListener('input',e=>{let q=e.target.value.toLowerCase().trim(),shown=0;document.querySelectorAll('.post').forEach(p=>{let yes=(p.innerText+' '+(p.dataset.search||'')).toLowerCase().includes(q);p.style.display=yes?'block':'none';if(yes)shown++});$('#empty').style.display=shown?'none':'block'});
+document.querySelectorAll('.navbtn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active')}));
+</script>
+</body></html>

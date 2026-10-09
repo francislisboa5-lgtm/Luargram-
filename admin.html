@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Luargram — administração</title>
+<link rel="stylesheet" href="/admin.css"></head>
+<body>
+<h1>Painel administrativo do Luargram</h1>
+<section class="panel" id="loginPanel">
+<h2>Entrar</h2>
+<form id="loginForm">
+<label for="username">Nome de administrador</label><input id="username" name="username" required autocomplete="username">
+<label for="password">Palavra-passe</label><input id="password" name="password" type="password" required autocomplete="current-password">
+<button type="submit">Entrar</button>
+</form><p id="loginMessage" class="small"></p>
+</section>
+<section class="panel hidden" id="dashboard">
+<p id="welcome"></p>
+<button id="pendingBtn">Pendentes</button><button id="allBtn" class="neutral">Todos</button><button id="logoutBtn" class="neutral">Terminar sessão</button>
+<p class="small">Verifica o comprovativo e confirma a transação na tua conta/serviço antes de aprovar. O sistema não valida automaticamente pagamentos.</p>
+<div id="message"></div>
+<table><thead><tr><th>Pedido</th><th>Pagamento</th><th>Comprovativo</th><th>Decisão</th></tr></thead><tbody id="rows"></tbody></table>
+</section>
+<script src="/admin.js" defer></script></body></html>

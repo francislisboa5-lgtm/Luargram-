@@ -1,0 +1,9 @@
+body{font-family:system-ui,sans-serif;max-width:1000px;margin:24px auto;padding:0 14px;color:#18212b}
+input,button,select,textarea{font:inherit;padding:9px;box-sizing:border-box}
+label{display:block;margin:12px 0 5px;font-weight:600}
+button{border:0;border-radius:8px;cursor:pointer;margin:4px 4px 4px 0;background:#2357d9;color:white}
+button.reject{background:#a32626}button.neutral{background:#596777}
+.panel{border:1px solid #dce2e8;border-radius:12px;padding:18px;margin:16px 0}
+table{width:100%;border-collapse:collapse}td,th{padding:9px;border-bottom:1px solid #dce2e8;text-align:left;vertical-align:top}
+.small{color:#586575;font-size:.92rem}.hidden{display:none}
+@media(max-width:700px){table,tbody,tr,td{display:block}thead{display:none}td{border:0;padding:5px}tr{border-bottom:1px solid #cbd5e1;padding:10px 0}}
